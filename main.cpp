@@ -24,15 +24,12 @@ using namespace std;
  * 
  */
 int main(int argc, char** argv) {
-    
+    //input file name
     string tmp;
     cout << "Please enter file name(in same directory as .exe)" << endl;
     cin >> tmp;
     
-    //create file object, read file object, check if null
-    //FILE* pFile;
-    //pFile = fopen(tmp.c_str(), "r");
-    
+    //input string/char to search
     cout << "Enter string you'd like to search for" << endl;
     string characters;
     cin >> characters;
@@ -44,25 +41,21 @@ int main(int argc, char** argv) {
         cout << "Error with file" << endl;
         exit(0);
     } 
-    
-    
-    int numberT = 0, wordCount = 0;
-    //size_t pos{0};
+     
+    int numberT = 0, wordCount = 0, characterCount = 0;
     
     string word;
-    while(file >> word){
+    while(file >> word){ 
         wordCount ++;
         size_t pos {0};
-        //size_t found = word.find(characters);
-        //if(found != string::npos){
-        //    numberT++;
-        //}
+        characterCount += word.size();
+        
         size_t found = word.find(characters);
-        if(found != string::npos){
+        if(found != string::npos){ //If there is one occurrence of entered string count it and try to find more
             for(;;){
                 pos = word.find(characters,pos);
                 if(pos == string::npos){
-                    break;
+                    break;      //break if rest of string contains no matches
                 }
                 ++ pos;
                 ++ numberT;        
@@ -70,9 +63,11 @@ int main(int argc, char** argv) {
         }
         
     }
+    //double percCh = (double) 100*(numberT/characterCount);
     
-    cout << numberT << endl;
-    
+    cout << "Number of times this string occurred: " << numberT << endl;
+    cout << "Total Number of words: " << wordCount << endl;
+    //cout << "Percentage string occurance in number of characters: " << percCh << endl;
     
     
 
