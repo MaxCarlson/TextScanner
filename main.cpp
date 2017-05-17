@@ -25,17 +25,41 @@ using namespace std;
  */
 
 
+string inputFileName(string tmp){
+    cout << "+----------------------------------------------------+" << endl;
+    cout << "| Please enter file name(in same directory as .exe). |" << endl;
+    cout << "| If you wish to exit the program type 'Exit' .      |"<< endl;
+    cout << "+----------------------------------------------------+" << endl;
+    cin >> tmp;
+    return tmp;
+}
+
+bool useSameFile(bool T){
+    
+    char yesNo;
+    cout << "Search same file again? y/n" << endl;
+    cin >> yesNo;
+    if(yesNo == 'y'){
+        T = true;
+        return T;
+    } else {
+        T = false;
+        return T;
+    }
+}
+
+
 void readFile(string tmp){
     
-    cout << "+--------------------------------------------------------+" << endl;
-    cout << "| Please enter file name(in same directory as .exe).     |" << endl;
-    cout << "| If you wish to exit the program enter hit enter twice. |"<< endl;
-    cout << "+--------------------------------------------------------+" << endl;
-    cin >> tmp;
+    tmp = inputFileName(tmp);
     
     if(tmp == "Exit"){ 
         exit(0);
     }
+    
+    bool T = true;
+    
+    while(T == true){
     
     //input string/char to search
     cout << "Enter string you'd like to search for" << endl;
@@ -78,6 +102,9 @@ void readFile(string tmp){
     cout << "Total Number of words: " << wordCount << endl;
     cout << endl;
     //cout << "Percentage string occurance in number of characters: " << percCh << endl;
+    T = useSameFile(T);
+    }
+ 
 }
 
 
