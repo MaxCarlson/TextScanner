@@ -27,13 +27,19 @@ using namespace std;
 
 void readFile(string tmp){
     
-    cout << "Please enter file name(in same directory as .exe)" << endl;
-    cout << "-------------------------------------------------" << endl;
-    cout << "If you wish to exit the program enter hit enter twice"<< endl;
+    cout << "+--------------------------------------------------------+" << endl;
+    cout << "| Please enter file name(in same directory as .exe).     |" << endl;
+    cout << "| If you wish to exit the program enter hit enter twice. |"<< endl;
+    cout << "+--------------------------------------------------------+" << endl;
     cin >> tmp;
+    
+    if(tmp == "Exit"){ 
+        exit(0);
+    }
     
     //input string/char to search
     cout << "Enter string you'd like to search for" << endl;
+    cout << endl;
     string characters;
     cin >> characters;
     
