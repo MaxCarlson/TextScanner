@@ -23,10 +23,13 @@ using namespace std;
 /*
  * 
  */
-int main(int argc, char** argv) {
-    //input file name
-    string tmp;
+
+
+void readFile(string tmp){
+    
     cout << "Please enter file name(in same directory as .exe)" << endl;
+    cout << "-------------------------------------------------" << endl;
+    cout << "If you wish to exit the program enter hit enter twice"<< endl;
     cin >> tmp;
     
     //input string/char to search
@@ -57,7 +60,7 @@ int main(int argc, char** argv) {
                 if(pos == string::npos){
                     break;      //break if rest of string contains no matches
                 }
-                ++ pos;
+                pos += characters.size();              
                 ++ numberT;        
             }
         }
@@ -67,7 +70,20 @@ int main(int argc, char** argv) {
     
     cout << "Number of times this string occurred: " << numberT << endl;
     cout << "Total Number of words: " << wordCount << endl;
+    cout << endl;
     //cout << "Percentage string occurance in number of characters: " << percCh << endl;
+}
+
+
+
+
+int main(int argc, char** argv) {
+    //input file name
+    string tmp;
+    while(tmp != "Exit"){
+        readFile(tmp);
+        
+    }
     
     
 
