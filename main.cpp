@@ -37,12 +37,14 @@ string inputFileName(string tmp){
 bool useSameFile(bool T){
     
     char yesNo;
-    cout << "Search same file again? y/n" << endl;
+    cout << "Search same file again? y/n/E ('E' to exit program)" << endl;
     cin >> yesNo;
     if(yesNo == 'y'){
         T = true;
         return T;
-    } else {
+    } else if (yesNo == 'E'){
+        exit(0);
+    }else {
         T = false;
         return T;
     }
@@ -60,49 +62,49 @@ void readFile(string tmp){
     bool T = true;
     
     while(T == true){
-    
-    //input string/char to search
-    cout << "Enter string you'd like to search for" << endl;
-    cout << endl;
-    string characters;
-    cin >> characters;
-    
-    ifstream file;
-    file.open(tmp.c_str());
-    
-    if(file == NULL){
-        cout << "Error with file" << endl;
-        exit(0);
-    } 
-     
-    int numberT = 0, wordCount = 0, characterCount = 0;
-    
-    string word;
-    while(file >> word){ 
-        wordCount ++;
-        size_t pos {0};
-        characterCount += word.size();
-        
-        size_t found = word.find(characters);
-        if(found != string::npos){ //If there is one occurrence of entered string count it and try to find more
-            for(;;){
-                pos = word.find(characters,pos);
-                if(pos == string::npos){
-                    break;      //break if rest of string contains no matches
+
+        //input string/char to search
+        cout << "Enter string you'd like to search for" << endl;
+        cout << endl;
+        string characters;
+        cin >> characters;
+
+        ifstream file;
+        file.open(tmp.c_str());
+
+        if(file == NULL){
+            cout << "Error with file" << endl;
+            exit(0);
+        } 
+
+        int numberT = 0, wordCount = 0, characterCount = 0;
+
+        string word;
+        while(file >> word){ 
+            wordCount ++;
+            size_t pos {0};
+            characterCount += word.size();
+
+            size_t found = word.find(characters);
+            if(found != string::npos){ //If there is one occurrence of entered string count it and try to find more
+                for(;;){
+                    pos = word.find(characters,pos);
+                    if(pos == string::npos){
+                        break;      //break if rest of string contains no matches
+                    }
+                    pos += characters.size();              
+                    ++ numberT;        
                 }
-                pos += characters.size();              
-                ++ numberT;        
             }
+
         }
-        
-    }
-    //double percCh = (double) 100*(numberT/characterCount);
-    
-    cout << "Number of times this string occurred: " << numberT << endl;
-    cout << "Total Number of words: " << wordCount << endl;
-    cout << endl;
-    //cout << "Percentage string occurance in number of characters: " << percCh << endl;
-    T = useSameFile(T);
+        //double percCh = (double) 100*(numberT/characterCount);
+
+        cout << "Number of times this string occurred: " << numberT << endl;
+        cout << "Total Number of words: " << wordCount << endl;
+        cout << endl;
+        //cout << "Percentage string occurance in number of characters: " << percCh << endl;
+        T = useSameFile(T);
     }
  
 }
